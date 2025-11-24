@@ -1,0 +1,140 @@
+[gd_scene load_steps=22 format=3 uid="uid://js28u1po5c7r"]
+
+[ext_resource type="Script" uid="uid://bqs2nmqltvo8r" path="res://Scripts/base_level.gd" id="1_vc1ya"]
+[ext_resource type="Shader" uid="uid://0psvh5o3pwye" path="res://Shaders/PortalTest.tres" id="2_e3lt7"]
+[ext_resource type="Texture2D" uid="uid://chq15i7ldstya" path="res://Textures/Flare/Trailing Flare.png" id="3_wyl5s"]
+[ext_resource type="Texture2D" uid="uid://dc7sda0f02oeb" path="res://Textures/Environments/8k_stars_milky_way.jpg" id="5_oor6l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hlu7p"]
+render_priority = 0
+shader = ExtResource("2_e3lt7")
+shader_parameter/Color_Intensity = 7.0
+shader_parameter/Portal_Color = Color(0.172474, 0.403849, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_ycjxv"]
+size = Vector2(2.5, 2.5)
+
+[sub_resource type="Curve" id="Curve_k37rq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.752174, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_c6mhr"]
+curve = SubResource("Curve_k37rq")
+
+[sub_resource type="Gradient" id="Gradient_ebmda"]
+offsets = PackedFloat32Array(0.311881, 0.633663)
+colors = PackedColorArray(0, 0, 1, 1, 0.972549, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_m0kcj"]
+gradient = SubResource("Gradient_ebmda")
+use_hdr = true
+
+[sub_resource type="Curve" id="Curve_2k0os"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_8glqs"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_tqqpu"]
+_limits = [-2.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_gjlnn"]
+curve_x = SubResource("Curve_2k0os")
+curve_y = SubResource("Curve_8glqs")
+curve_z = SubResource("Curve_tqqpu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tuoqx"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 1.0
+emission_ring_cone_angle = 90.0
+orbit_velocity_min = 0.2
+orbit_velocity_max = 0.2
+orbit_velocity_curve = SubResource("CurveXYZTexture_gjlnn")
+radial_velocity_min = 0.199978
+radial_velocity_max = 0.499978
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_m0kcj")
+alpha_curve = SubResource("CurveTexture_c6mhr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ahf6q"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_wyl5s")
+heightmap_scale = -16.0
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_l56wp"]
+material = SubResource("StandardMaterial3D_ahf6q")
+size = 0.2
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1hb7a"]
+panorama = ExtResource("5_oor6l")
+
+[sub_resource type="Sky" id="Sky_yqp1w"]
+sky_material = SubResource("PanoramaSkyMaterial_1hb7a")
+
+[sub_resource type="Environment" id="Environment_0ohif"]
+background_mode = 2
+sky = SubResource("Sky_yqp1w")
+
+[sub_resource type="LabelSettings" id="LabelSettings_oor6l"]
+font_size = 26
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[node name="BaseLevel" type="Node3D"]
+script = ExtResource("1_vc1ya")
+
+[node name="Portal" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_hlu7p")
+mesh = SubResource("QuadMesh_ycjxv")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Portal"]
+amount = 250
+lifetime = 3.0
+trail_enabled = true
+trail_lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_tuoqx")
+draw_pass_1 = SubResource("RibbonTrailMesh_l56wp")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Portal"]
+light_color = Color(0.509306, 0.667922, 1, 1)
+light_energy = 0.576
+
+[node name="SpawnPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.94027, 0.129975, 0.31464, -0.198616, -0.541195, 0.817105, 0.276484, -0.830792, -0.483054, 0.027346, 5, -0.0745836)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0ohif")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "awdawdawdawdawdawd
+"
+label_settings = SubResource("LabelSettings_oor6l")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true

@@ -1,0 +1,94 @@
+[gd_scene load_steps=16 format=3 uid="uid://c0yix6cyu245o"]
+
+[ext_resource type="Shader" uid="uid://0psvh5o3pwye" path="res://Shaders/PortalTest.tres" id="1_v2cr3"]
+[ext_resource type="Texture2D" uid="uid://chq15i7ldstya" path="res://Textures/Flare/Trailing Flare.png" id="2_urkxo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hlu7p"]
+render_priority = 0
+shader = ExtResource("1_v2cr3")
+shader_parameter/Color_Intensity = 7.0
+shader_parameter/Portal_Color = Color(0.172474, 0.403849, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_ycjxv"]
+size = Vector2(2.5, 2.5)
+
+[sub_resource type="Curve" id="Curve_k37rq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.752174, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_c6mhr"]
+curve = SubResource("Curve_k37rq")
+
+[sub_resource type="Gradient" id="Gradient_ebmda"]
+offsets = PackedFloat32Array(0.311881, 0.633663)
+colors = PackedColorArray(0, 0, 1, 1, 0.972549, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_m0kcj"]
+gradient = SubResource("Gradient_ebmda")
+use_hdr = true
+
+[sub_resource type="Curve" id="Curve_2k0os"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_8glqs"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_tqqpu"]
+_limits = [-2.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_gjlnn"]
+curve_x = SubResource("Curve_2k0os")
+curve_y = SubResource("Curve_8glqs")
+curve_z = SubResource("Curve_tqqpu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tuoqx"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 1.0
+emission_ring_cone_angle = 90.0
+orbit_velocity_min = 0.2
+orbit_velocity_max = 0.2
+orbit_velocity_curve = SubResource("CurveXYZTexture_gjlnn")
+radial_velocity_min = 0.199978
+radial_velocity_max = 0.499978
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_m0kcj")
+alpha_curve = SubResource("CurveTexture_c6mhr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ahf6q"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_urkxo")
+heightmap_scale = -16.0
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_l56wp"]
+material = SubResource("StandardMaterial3D_ahf6q")
+size = 0.2
+
+[node name="Portal" type="MeshInstance3D"]
+material_override = SubResource("ShaderMaterial_hlu7p")
+mesh = SubResource("QuadMesh_ycjxv")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 250
+lifetime = 3.0
+trail_enabled = true
+trail_lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_tuoqx")
+draw_pass_1 = SubResource("RibbonTrailMesh_l56wp")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.509306, 0.667922, 1, 1)
+light_energy = 0.576

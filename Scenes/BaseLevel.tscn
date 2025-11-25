@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://js28u1po5c7r"]
+[gd_scene load_steps=23 format=3 uid="uid://js28u1po5c7r"]
 
 [ext_resource type="Script" uid="uid://bqs2nmqltvo8r" path="res://Scripts/base_level.gd" id="1_vc1ya"]
 [ext_resource type="Shader" uid="uid://0psvh5o3pwye" path="res://Shaders/PortalTest.tres" id="2_e3lt7"]
 [ext_resource type="Texture2D" uid="uid://chq15i7ldstya" path="res://Textures/Flare/Trailing Flare.png" id="3_wyl5s"]
+[ext_resource type="Script" uid="uid://b5cu7l0yynqyx" path="res://Scripts/label.gd" id="5_1hb7a"]
 [ext_resource type="Texture2D" uid="uid://dc7sda0f02oeb" path="res://Textures/Environments/8k_stars_milky_way.jpg" id="5_oor6l"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hlu7p"]
@@ -138,3 +139,4 @@ label_settings = SubResource("LabelSettings_oor6l")
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
+script = ExtResource("5_1hb7a")

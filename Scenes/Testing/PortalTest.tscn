@@ -1,11 +1,11 @@
 [gd_scene load_steps=16 format=3 uid="uid://c0yix6cyu245o"]
 
-[ext_resource type="Shader" uid="uid://0psvh5o3pwye" path="res://Shaders/PortalTest.tres" id="1_v2cr3"]
-[ext_resource type="Texture2D" uid="uid://chq15i7ldstya" path="res://Textures/Flare/Trailing Flare.png" id="2_urkxo"]
+[ext_resource type="Shader" uid="uid://0psvh5o3pwye" path="res://Shaders/PortalTest.tres" id="1_h0ruu"]
+[ext_resource type="Texture2D" uid="uid://chq15i7ldstya" path="res://Textures/Flare/Trailing Flare.png" id="2_dma1r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hlu7p"]
 render_priority = 0
-shader = ExtResource("1_v2cr3")
+shader = ExtResource("1_h0ruu")
 shader_parameter/Color_Intensity = 7.0
 shader_parameter/Portal_Color = Color(0.172474, 0.403849, 1, 1)
 
@@ -69,7 +69,7 @@ blend_mode = 1
 cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("2_urkxo")
+albedo_texture = ExtResource("2_dma1r")
 heightmap_scale = -16.0
 use_particle_trails = true
 

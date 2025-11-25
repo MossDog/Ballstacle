@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=4 uid="uid://dgnps32endmd4"]
 
-[ext_resource type="PackedScene" uid="uid://js28u1po5c7r" path="res://Scenes/BaseLevel.tscn" id="1_uppmu"]
+[ext_resource type="PackedScene" uid="uid://js28u1po5c7r" path="res://Scenes/Levels/BaseLevel.tscn" id="1_uppmu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sxwsa"]
 resource_name = "White"

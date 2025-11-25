@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=4 uid="uid://c4yh6j1vwf7qb"]
 
-[ext_resource type="PackedScene" uid="uid://js28u1po5c7r" path="res://Scenes/BaseLevel.tscn" id="1_q12u6"]
+[ext_resource type="PackedScene" uid="uid://js28u1po5c7r" path="res://Scenes/Levels/BaseLevel.tscn" id="1_q12u6"]
 [ext_resource type="Texture2D" uid="uid://bswunpcu82om1" path="res://Textures/Spheres/Earth/8k_earth_daymap.jpg" id="2_slnnj"]
 [ext_resource type="Texture2D" uid="uid://cdcfuw0v2eyph" path="res://Textures/Spheres/Earth/8k_earth_specular_map.png" id="3_t3or0"]
 [ext_resource type="Texture2D" uid="uid://bcegkrlj0jmgh" path="res://Textures/Spheres/Earth/8k_earth_normal_map.png" id="4_ysn8j"]

@@ -2,7 +2,7 @@ extends RigidBody3D
 
 var speed = 3
 
-var levelScene : PackedScene = preload("res://Scenes/BaseLevel.tscn")
+var levelScene : PackedScene = preload("res://Scenes/Levels/BaseLevel.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

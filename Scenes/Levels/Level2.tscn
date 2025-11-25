@@ -112,4 +112,4 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_llwst")
 
 [node name="Portal" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -73.721)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -74)

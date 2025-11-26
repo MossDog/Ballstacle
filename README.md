@@ -11,7 +11,7 @@ Ballstacle is designed for players who enjoy games like *Trials* and *Trackmania
 
 ## Development Details
 
-- **Engine**: Godot 4.4 (with plans to upgrade to 4.5 and future versions as they are released).
+- **Engine**: Godot 4.5.
 - **Current State**: The game is not intended to be installed or played in its current state.
 
 ## Contribution

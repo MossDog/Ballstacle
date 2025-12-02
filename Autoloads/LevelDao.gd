@@ -10,8 +10,9 @@ func load_levels():
 			print("FILE NAME ", file_name)
 			var data = file_name.split("_")
 			print(data)
-			var id = int(data[2])
 			var chapter_id = int(data[1])
+			var id = int(data[2])
 			var title = data[3]
 			var path = LEVEL_DIR + file_name
-			levels.append(Level.new(id, chapter_id, title, path, null))
+			var lvl_preview = null # PLACEHOLDER
+			levels.append(Level.new(chapter_id, id, title, path, lvl_preview))

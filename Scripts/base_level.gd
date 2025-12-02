@@ -63,7 +63,7 @@ func spawn_camera():
 	camera_mode = CameraMode.SNAP
 
 
-func move_camera(): #Default behavior with no params
+func move_camera():
 	if camera_mode == CameraMode.TRACK:
 		#print("Smooth")
 		var target = player.position + camera_offset
@@ -72,6 +72,5 @@ func move_camera(): #Default behavior with no params
 		#print("Instant")
 		camera.position = player.position + camera_offset
 		camera_mode = CameraMode.TRACK
-		#print(cam.position)
 
 	camera.look_at(player.position)

@@ -4,31 +4,22 @@ extends Control
 @onready var level_list: VBoxContainer = $LevelList
 
 func _ready():
-	load_levels()
+	LevelDao.load_levels()
 	display_levels()
 
 func display_levels():
-	pass
+	for level in LevelDao.get("levels"):
+		create_level_button(level)
+
+func load_level(level: Level):
+	print("Loading Level: ", level.path)
+	get_tree().change_scene_to_file(level.path)
 
 
-func load_level(path: String):
-	print("Loading Level: ", path)
-	get_tree().change_scene_to_file(path)
-
-
-func create_level_button(path: String):
+func create_level_button(level: Level):
+	print("CREATING BUTTON FOR '{0}'".format([level.path]))
 	var button := Button.new()
-	button.text = path.get_file().get_basename()  # e.g. "Level1"
-	button.pressed.connect(load_level.bind(path))
-	print("Path bound to button", path)
+	button.text = level.title
+	button.pressed.connect(load_level.bind(level))
 	level_list.add_child(button)
 	print("button added to scene tree")
-
-
-func load_levels():
-	var dir := DirAccess.open("res://Scenes/Levels")
-	if dir:
-		for file_name in dir.get_files():
-			if file_name.begins_with("Level") and file_name.ends_with(".tscn"):
-				var path = "res://Scenes/Levels/" + file_name
-				create_level_button(path)

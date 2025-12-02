@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 [autoload]
 
 CsgToolkitAutoload="*res://addons/csg_toolkit/scripts/csg_toolkit_config.gd"
+LevelDao="*res://Autoloads/LevelDao.gd"
 
 [display]
 

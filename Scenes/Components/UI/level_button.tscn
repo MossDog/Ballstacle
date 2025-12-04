@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://bh56bvpvugk0u"]
+
+[ext_resource type="Texture2D" uid="uid://cq68s4ab1dyhe" path="res://Images/Level_Thumbnails/thumbnail_1_1.png" id="1_80oql"]
+[ext_resource type="Script" uid="uid://cit8rc7d14jkx" path="res://Scenes/Components/UI/level_button.gd" id="1_gvxi2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gvxi2"]
+font_size = 32
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
+[node name="LevelButton" type="Button"]
+custom_minimum_size = Vector2(200, 120)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -60.0
+offset_right = 100.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_gvxi2")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+custom_minimum_size = Vector2(200, 120)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_80oql")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Control"]
+custom_minimum_size = Vector2(200, 120)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Pussy Clart"
+label_settings = SubResource("LabelSettings_gvxi2")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
